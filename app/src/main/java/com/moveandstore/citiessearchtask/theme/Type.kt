@@ -1,4 +1,4 @@
-package com.moveandstore.citiessearchtask.ui.theme
+package com.moveandstore.citiessearchtask.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

@@ -1,6 +1,5 @@
-package com.moveandstore.citiessearchtask.ui.theme
+package com.moveandstore.citiessearchtask.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
