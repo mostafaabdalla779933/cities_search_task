@@ -2,6 +2,7 @@ package com.moveandstore.citiessearchtask.ui
 
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -36,6 +37,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,6 +46,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.moveandstore.citiessearchtask.data.model.City
 import com.moveandstore.citiessearchtask.data.model.Coord
 import com.moveandstore.citiessearchtask.theme.GrayLight
+import com.moveandstore.citiessearchtask.utils.navigateToGoogleMaps
 
 
 @Composable
@@ -53,10 +56,11 @@ fun Cities(viewModel: CitiesVM = hiltViewModel()) {
     val imePadding = WindowInsets.ime.asPaddingValues()
     val focusManager = LocalFocusManager.current
 
-    Column(modifier = Modifier
-        .background(color = GrayLight)
-        .fillMaxSize()
-        .padding(imePadding)
+    Column(
+        modifier = Modifier
+            .background(color = GrayLight)
+            .fillMaxSize()
+            .padding(imePadding)
     ) {
 
 
@@ -136,12 +140,15 @@ private fun SearchBar(
 
 @Composable
 private fun CityItem(city: City) {
-
+    val context = LocalContext.current
     Row(
         modifier = Modifier
             .padding(start = 10.dp, end = 10.dp, top = 10.dp)
             .background(color = Color.White, shape = RoundedCornerShape(8.dp))
-            .wrapContentHeight(),
+            .wrapContentHeight()
+            .clickable {
+                context.navigateToGoogleMaps(longitude = city.coord.longitude, latitude =  city.coord.latitude)
+            },
         verticalAlignment = Alignment.CenterVertically
     ) {
 
