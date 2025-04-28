@@ -79,8 +79,15 @@ fun Cities(viewModel: CitiesVM = hiltViewModel()) {
                 .weight(1.0f)
                 .fillMaxWidth()
         ) {
-            items(searchResults, key = { it.id }) { city ->
-                CityItem(city)
+            searchResults.groupBy { it.name.first() }.forEach { (letter, citiesInGroup) ->
+
+                item(key = "header_$letter") {
+                    StickyHeader(letter.toString())
+                }
+
+                items(citiesInGroup, key = { it.id }) { city ->
+                    CityItem(city)
+                }
             }
         }
 
@@ -101,6 +108,32 @@ fun Cities(viewModel: CitiesVM = hiltViewModel()) {
                 .fillMaxWidth()
                 .padding(16.dp)
         )
+    }
+}
+
+@Composable
+private fun StickyHeader(letter:String){
+    Row(modifier = Modifier
+        .fillMaxWidth()
+        .background(Color.Transparent)) {
+        Box(
+            modifier = Modifier
+                .padding(8.dp)
+                .width(40.dp)
+                .height(40.dp)
+                .background(
+                    color = Color.White,
+                    shape = CircleShape
+                )
+        ) {
+            Text(
+                text = letter,
+                color = Color.Black,
+                style = MaterialTheme.typography.bodyMedium,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.align(Alignment.Center)
+            )
+        }
     }
 }
 
@@ -143,11 +176,14 @@ private fun CityItem(city: City) {
     val context = LocalContext.current
     Row(
         modifier = Modifier
-            .padding(start = 10.dp, end = 10.dp, top = 10.dp)
+            .padding(start = 60.dp, end = 10.dp, top = 10.dp)
             .background(color = Color.White, shape = RoundedCornerShape(8.dp))
             .wrapContentHeight()
             .clickable {
-                context.navigateToGoogleMaps(longitude = city.coord.longitude, latitude =  city.coord.latitude)
+                context.navigateToGoogleMaps(
+                    longitude = city.coord.longitude,
+                    latitude = city.coord.latitude
+                )
             },
         verticalAlignment = Alignment.CenterVertically
     ) {
