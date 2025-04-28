@@ -1,4 +1,4 @@
-package com.moveandstore.citiessearchtask.data
+package com.moveandstore.citiessearchtask.data.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

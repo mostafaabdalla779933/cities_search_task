@@ -2,7 +2,7 @@ package com.moveandstore.citiessearchtask.data.repo
 
 import android.content.Context
 import com.moveandstore.citiessearchtask.R
-import com.moveandstore.citiessearchtask.data.City
+import com.moveandstore.citiessearchtask.data.model.City
 import com.moveandstore.citiessearchtask.domin.repository.CityRepository
 import com.moveandstore.citiessearchtask.utils.Resource
 import dagger.hilt.android.qualifiers.ApplicationContext
